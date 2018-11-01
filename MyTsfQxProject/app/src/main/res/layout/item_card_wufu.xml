@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="40dp">
+    <TextView
+        android:id="@+id/tv_name_tiemo"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:gravity="center"
+        android:text="精品贴膜"
+        android:textColor="@color/color_black" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/tv_name_tiemo"
+        android:gravity="center"
+        android:text="ssss" />
+
+    <TextView
+        android:id="@+id/tv_tian_num"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="永久2天"
+        android:textColor="@color/color_green" />
+
+    <TextView
+        android:id="@+id/tv_nums"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:gravity="center"
+        android:text="10次" />
+</RelativeLayout>

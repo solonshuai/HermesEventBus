@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/mTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/color_title_bg"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="2dp"
+        app:tabMinWidth="100dp"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabTextColor="#5000" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_gray" />
+
+    <com.zhjk.admin.mylibrary.MultipleStatusView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/multipleStatusView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyView="@layout/empty_view"
+        app:errorView="@layout/error_view"
+        app:loadingView="@layout/loading_view"
+        app:noNetworkView="@layout/no_network_view">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.zhjk.admin.mylibrary.MultipleStatusView>
+</LinearLayout>

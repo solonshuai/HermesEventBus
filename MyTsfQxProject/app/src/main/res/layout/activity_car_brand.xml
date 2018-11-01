@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.zxy.mytsfqxproject.View.SideBar
+                android:id="@+id/sb_list"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="right|center"
+                tools:ignore="RtlHardcoded" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_car"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/color_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_car_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="xxxxxx"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/album_sp_16" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/color_black" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mRecyclerView_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

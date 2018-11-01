@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@color/color_white">
+
+    <LinearLayout
+        android:id="@+id/layout_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_divder"
+        android:layout_marginStart="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_fuwuname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            tools:text="不太"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/album_sp_16" />
+
+        <TextView
+            android:id="@+id/tv_fuwudsc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            tools:text="不太:Bt"
+            android:textSize="@dimen/album_sp_14" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:gravity="right"
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ck_istrue"
+            android:padding="5dp"
+            tools:text="888855:00"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/album_sp_16" />
+
+        <CheckBox
+            android:id="@+id/ck_istrue"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="40dp"
+            android:padding="5dp" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_divder"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:background="@color/color_gray" />
+</RelativeLayout>
