@@ -66,8 +66,6 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
     }
 
     override fun initView() {
-        this.let { StatusBarUtil.darkMode(it) }
-        this.let { StatusBarUtil.setPaddingSmart(it, top_view) }
         mLayoutStatusView = multipleStatusView
         iv_left.setImageResource(R.mipmap.img_back)
         iv_left.setOnClickListener { finish() }
@@ -94,6 +92,8 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
                 mAddFuwuAdapter.setDataList(mAddFuwuBean)
             }
         })
+        this.let { StatusBarUtil.darkMode(it) }
+        this.let { StatusBarUtil.setPaddingSmart(it, top_view) }
     }
 
     override fun start() {
