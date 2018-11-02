@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
-
+//apply plugin: 'realm-android'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+//realm {
+//    syncEnabled = true;
+//}
 android {
     compileSdkVersion 27
     defaultConfig {

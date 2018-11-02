@@ -6,24 +6,21 @@ import android.text.TextUtils
 import android.view.View
 import com.zxy.mytsfqxproject.MainActivity
 import com.zxy.mytsfqxproject.R
-import com.zxy.mytsfqxproject.Utils.StatusBarUtil
 import com.zxy.mytsfqxproject.Utils.Tools
 import com.zxy.mytsfqxproject.base.BaseActivity
 import com.zxy.mytsfqxproject.db.SPUtil
+import com.zxy.mytsfqxproject.http.Result
 import com.zxy.mytsfqxproject.http.RetrofitManager
 import com.zxy.mytsfqxproject.http.UrlConstant
-import com.zxy.mytsfqxproject.mvp.entity.MessageEvent
 import com.zxy.mytsfqxproject.mvp.entity.UserBean
 import kotlinx.android.synthetic.main.activity_login.*
-import org.greenrobot.eventbus.EventBus
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class LoginActivity : BaseActivity(), View.OnClickListener {
+class LoginActivity : BaseActivity(), View.OnClickListener, Callback<Result<UserBean>> {
     private var pamrms = HashMap<String, Any>()
-
     override fun layoutId(): Int {
         return R.layout.activity_login
     }
@@ -51,27 +48,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 mProgressDialog!!.show()
                 pamrms["phone"] = et_name.text.toString()
                 pamrms["pwd"] = et_pwd.text.toString()
-                RetrofitManager.service.login(Tools.getRequestBody(pamrms)).enqueue(object : Callback<UserBean> {
-                    override fun onFailure(call: Call<UserBean>, t: Throwable) {
-                        mProgressDialog!!.dismiss()
-                        showToast(getString(R.string.http_error))
-                    }
-
-                    override fun onResponse(call: Call<UserBean>, response: Response<UserBean>) {
-                        mProgressDialog!!.dismiss()
-                        showToast(response.body()!!.errmsg)
-                        if (response.body()!!.code == 200) {
-                            val userBean = response.body()!!.result
-                            SPUtil.putData(UrlConstant.token, userBean.acctoken)
-                            SPUtil.putData(UrlConstant.userName, userBean.username)
-                            SPUtil.putData(UrlConstant.userImg, userBean.photo)
-                            SPUtil.putData(UrlConstant.rongCloud, userBean.rongCloud)
-                            SPUtil.putData(UrlConstant.userId, userBean.staff_id)
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            this@LoginActivity.finish()
-                        }
-                    }
-                })
+                RetrofitManager.service.login(Tools.getRequestBody(pamrms)).enqueue(this)
             }
             R.id.tv_register -> {
                 val intent = Intent(this, RegisterActivity::class.java)
@@ -83,4 +60,27 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
+    override fun onFailure(call: Call<Result<UserBean>>, t: Throwable) {
+    }
+
+    override fun onResponse(call: Call<Result<UserBean>>, response: Response<Result<UserBean>>) {
+        mProgressDialog!!.dismiss()
+        showToast(response.body()!!.errmsg)
+        if (response.code() == 200) {
+            val userBean = response.body()!!.result
+            SPUtil.putData(UrlConstant.token, userBean.acctoken)
+            SPUtil.putData(UrlConstant.userName, userBean.username)
+            SPUtil.putData(UrlConstant.userImg, userBean.photo)
+            SPUtil.putData(UrlConstant.rongCloud, userBean.rongCloud)
+            SPUtil.putData(UrlConstant.userId, userBean.staff_id)
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            this@LoginActivity.finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
+

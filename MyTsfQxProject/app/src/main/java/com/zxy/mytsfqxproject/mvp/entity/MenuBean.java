@@ -4,6 +4,7 @@ import java.util.List;
 
 public class MenuBean {
 
+
     /**
      * code : 200
      * errmsg : 成功

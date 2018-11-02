@@ -41,7 +41,6 @@ class HomeFragment : BaseFragment(), OnRecyclerItemClickListener<MenuBean.Result
 //    }
     private lateinit var menuAdapter: MenuAdapter
     private var pamrms = HashMap<String, Any>()
-
     companion object {
         fun getInstance(title: String): HomeFragment {
             val fragment = HomeFragment()

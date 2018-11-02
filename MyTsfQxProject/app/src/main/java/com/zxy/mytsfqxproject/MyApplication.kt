@@ -40,6 +40,7 @@ class MyApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+//        Realm.init(this)
         EventBus.getDefault().register(this)
         SPUtil.getInstance(this)
         if (applicationInfo.processName == getCurProcessName(applicationContext)) {
@@ -47,6 +48,16 @@ class MyApplication : MultiDexApplication() {
         }
         SealAppContext.init(this)
         RongIM.setConnectionStatusListener(MyConnectionStatusListener())
+        // 默认配置
+//        val realm = Realm.getDefaultInstance()
+//// 自定义配置
+//        val config = RealmConfiguration . Builder ()
+//                // 文件名
+//                .name("test.realm")
+//                // 版本号
+//                .schemaVersion(1)
+//                .build()
+//        Realm.getInstance(config)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

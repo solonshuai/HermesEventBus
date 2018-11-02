@@ -16,7 +16,7 @@ interface ApiService {
     fun findLoginPwd(@Body route: RequestBody): Call<JsonObject>
 
     @POST("Login/login")
-    fun login(@Body route: RequestBody): Call<UserBean>
+    fun login(@Body route: RequestBody): Call<Result<UserBean>>
 
     @POST("Appmenu/getMenu")
     fun getMenu(@Body route: RequestBody): Call<MenuBean>
