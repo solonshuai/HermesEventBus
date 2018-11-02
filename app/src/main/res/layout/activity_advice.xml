@@ -12,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@+id/top_view"
+        android:gravity="top"
+        android:hint="请输入对我们的建议"
+        android:padding="10dp"
         android:layout_margin="10dp"
         android:background="@drawable/shape_gary" />
 
