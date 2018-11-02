@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+
+    <com.zhjk.admin.mylibrary.MultipleStatusView
+        android:id="@+id/multipleStatusView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_total"
+        android:layout_below="@+id/top_view"
+        app:emptyView="@layout/empty_view"
+        app:errorView="@layout/error_view"
+        app:loadingView="@layout/loading_view"
+        app:noNetworkView="@layout/no_network_view">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false" />
+    </com.zhjk.admin.mylibrary.MultipleStatusView>
+
+    <RelativeLayout
+        android:id="@+id/layout_total"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/tv_offer"
+        android:background="@color/color_white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="合计"
+            android:textSize="@dimen/album_sp_16" />
+
+        <TextView
+            android:id="@+id/tv_total_money"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:text="合计"
+            android:textColor="@color/color_orange"
+            android:textSize="@dimen/album_sp_16" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_offer"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_orange"
+        android:gravity="center"
+        android:text="结 算"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/album_sp_16" />
+</RelativeLayout>

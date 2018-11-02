@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zxy.mytsfqxproject.activity.OrderListActivity">
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+
+    <com.haibin.calendarview.CalendarLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:orientation="vertical"
+        app:calendar_content_view_id="@+id/nestedScrollView"
+        app:default_status="expand">
+
+        <com.haibin.calendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:calendar_padding="10dp"
+            app:current_day_lunar_text_color="#ff0000"
+            app:current_day_text_color="#ff0000"
+            app:current_month_lunar_text_color="#CFCFCF"
+            app:current_month_text_color="#333333"
+            app:lunar_text_size="10sp"
+            app:max_year="2030"
+            app:max_year_day="31"
+            app:max_year_month="12"
+            app:min_year="2017"
+            app:min_year_day="1"
+            app:min_year_month="1"
+            app:month_view="com.zxy.mytsfqxproject.View.MeiZuMonthView"
+            app:month_view_show_mode="mode_all"
+            app:other_month_lunar_text_color="#e1e1e1"
+            app:other_month_text_color="#e1e1e1"
+            app:scheme_lunar_text_color="#CFCFCF"
+            app:scheme_text="假"
+            app:scheme_text_color="#333"
+            app:scheme_theme_color="@color/colorPrimary"
+            app:selected_lunar_text_color="@color/colorPrimary"
+            app:selected_text_color="@color/colorPrimary"
+            app:selected_theme_color="#80cfcfcf"
+            app:week_background="#fff"
+            app:week_bar_height="46dp"
+            app:week_line_background="#00000000"
+            app:week_line_margin="16dp"
+            app:week_start_with="mon"
+            app:week_text_size="10sp"
+            app:week_view="com.zxy.mytsfqxproject.View.MeizuWeekView"
+            app:year_view_background="#f6f6f6"
+            app:year_view_day_text_color="#333333"
+            app:year_view_day_text_size="9sp"
+            app:year_view_month_text_color="#ff0000"
+            app:year_view_month_text_size="20sp"
+            app:year_view_scheme_color="#f17706" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_gray" />
+    </com.haibin.calendarview.CalendarLayout>
+</LinearLayout>
