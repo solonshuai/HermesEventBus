@@ -1,5 +1,6 @@
 package com.zxy.mytsfqxproject.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -78,6 +79,7 @@ class AddCarActivity : BaseActivity(), View.OnClickListener, OnChooseCameraListe
             e.printStackTrace()
         }
         et_car_num.setOnTouchListener(object : View.OnTouchListener {
+            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 if(TextUtils.isEmpty(et_car_num.text)){
                     KeyboardUtil(this@AddCarActivity, this@AddCarActivity, et_car_num).showChinese()
