@@ -190,4 +190,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("staff/appAlterLoginPwd")//修改密码
     fun appAlterLoginPwd(@Field("old_pwd") old_pwd: String, @Field("new_pwd") new_pwd: String): Call<JsonObject>
+
+    @POST("client/gatherInfo")//电话号码
+    fun gatherInfo(@Body route: RequestBody): Call<JsonObject>
 }

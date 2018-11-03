@@ -2,7 +2,7 @@ package com.zxy.mytsfqxproject.mvp.entity;
 
 public class PhoneList {
     private String name;
-    private String number;
+    private String tel;
     private int id;
 
 
@@ -23,10 +23,10 @@ public class PhoneList {
     }
 
     public String getNumber() {
-        return number;
+        return tel;
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        this.tel = number;
     }
 }
