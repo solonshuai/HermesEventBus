@@ -51,8 +51,8 @@ class ChangePwdActivity : BaseActivity() {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 val sss = response.body()!!.toString()
                 val jobj = JSONObject(sss)
-                val errmsg = jobj.get("errmsg").toString()
-                val code = jobj.get("code")
+                val errmsg = jobj.optString("errmsg")
+                val code = jobj.optInt("code")
                 if (code == 200) {
                     showToast(errmsg)
                     finish()
