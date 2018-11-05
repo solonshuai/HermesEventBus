@@ -22,9 +22,12 @@ class ChangePwdActivity : BaseActivity() {
         iv_left.setImageResource(R.mipmap.img_back)
         iv_left.setOnClickListener { finish() }
         tv_header_title.text = "修改密码"
+        tv_commit.setOnClickListener {
+            changepwd()
+        }
     }
 
-    override fun start() {
+    fun changepwd() {
         if (TextUtils.isEmpty(et_pwd.text.toString())) {
             showToast("请输入旧密码")
             return
@@ -58,5 +61,8 @@ class ChangePwdActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    override fun start() {
     }
 }
