@@ -1,10 +1,13 @@
 package com.zxy.mytsfqxproject.activity
 
+import android.content.Intent
 import android.text.TextUtils
 import com.google.gson.JsonObject
 import com.zxy.mytsfqxproject.R
+import com.zxy.mytsfqxproject.Utils.ActivityManager
 import com.zxy.mytsfqxproject.Utils.StatusBarUtil
 import com.zxy.mytsfqxproject.base.BaseActivity
+import com.zxy.mytsfqxproject.db.SPUtil
 import com.zxy.mytsfqxproject.http.RetrofitManager
 import kotlinx.android.synthetic.main.activity_change_pwd.*
 import kotlinx.android.synthetic.main.top_view.*
@@ -55,6 +58,9 @@ class ChangePwdActivity : BaseActivity() {
                 val code = jobj.optInt("code")
                 if (code == 200) {
                     showToast(errmsg)
+                    SPUtil.clearData()
+                    ActivityManager.finishAll()
+                    startActivity(Intent(this@ChangePwdActivity, LoginActivity::class.java))
                     finish()
                 } else {
                     showToast(errmsg)

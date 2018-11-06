@@ -91,7 +91,7 @@ dependencies {
     //空白加载页面
     implementation 'com.github.solonshuai:Muliple:1.0'
     //运行时权限
-    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation 'me.weyye.hipermission:library:1.0.7'
     //https://github.com/alibaba/fastjson
     implementation 'com.alibaba:fastjson:1.2.49'
     //glide
