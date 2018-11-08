@@ -12,8 +12,8 @@ android {
         applicationId "com.zxy.mytsfqxproject"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName '1.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         //融云 的音视频仅支持这两个架构 这是过滤 可以删除包里面的
@@ -91,7 +91,7 @@ dependencies {
     //空白加载页面
     implementation 'com.github.solonshuai:Muliple:1.0'
     //运行时权限
-    implementation 'me.weyye.hipermission:library:1.0.7'
+    implementation'pub.devrel:easypermissions:1.2.0'
     //https://github.com/alibaba/fastjson
     implementation 'com.alibaba:fastjson:1.2.49'
     //glide

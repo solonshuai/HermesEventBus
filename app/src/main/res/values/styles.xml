@@ -30,13 +30,4 @@
         <!-- 是否模糊 -->
         <item name="android:backgroundDimEnabled">false</item>
     </style>
-
-    <style name="PermissionBlueStyle">
-        <item name="PermissionTitleColor">@color/color_white</item>
-        <item name="PermissionMsgColor">@color/color_white</item>
-        <item name="PermissionItemTextColor">@color/color_white</item>
-        <item name="PermissionButtonBackground">@drawable/shape_btn</item>
-        <item name="PermissionBackround">@drawable/shape_bg_white</item>
-        <item name="PermissionButtonTextColor">@android:color/white</item>
-    </style>
 </resources>

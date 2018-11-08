@@ -62,6 +62,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener, Callback<Result<User
     }
 
     override fun onFailure(call: Call<Result<UserBean>>, t: Throwable) {
+        mProgressDialog!!.dismiss()
+        showToast("登录失败")
     }
 
     override fun onResponse(call: Call<Result<UserBean>>, response: Response<Result<UserBean>>) {

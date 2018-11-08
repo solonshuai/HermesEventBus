@@ -196,9 +196,9 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
                         val jobj = JSONObject(sss)
                         val errmsg = jobj.optString("errmsg")
                         val code = jobj.getInt("code")
-                        val result = JSONObject(jobj.optString("result"))
-                        val car_id = result.optString("car_id")
                         if (code == 200) {
+                            val result = JSONObject(jobj.optString("result"))
+                            val car_id = result.optString("car_id")
                             showToast(errmsg)
                             var intent = Intent(this@NewOrdeAddActivity, NewOrdeListItemActivity::class.java)
                             intent.putExtra("car_id", car_id)

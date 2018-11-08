@@ -2,7 +2,6 @@ package com.zxy.mytsfqxproject.activity
 
 import android.Manifest
 import android.content.Intent
-import android.support.v4.content.res.ResourcesCompat
 import android.text.TextUtils
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -12,9 +11,7 @@ import com.zxy.mytsfqxproject.base.BaseActivity
 import com.zxy.mytsfqxproject.db.SPUtil
 import com.zxy.mytsfqxproject.http.UrlConstant
 import kotlinx.android.synthetic.main.activity_splash.*
-import me.weyye.hipermission.HiPermission
-import me.weyye.hipermission.PermissionCallback
-import me.weyye.hipermission.PermissionItem
+import pub.devrel.easypermissions.EasyPermissions
 
 
 /**
@@ -58,32 +55,23 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun checkPermission() {
-        val permissonItems = ArrayList<PermissionItem>()
-        permissonItems.add(PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, "存储", R.drawable.permission_ic_storage))
-        permissonItems.add(PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION, "定位", R.drawable.permission_ic_location))
-        permissonItems.add(PermissionItem(Manifest.permission.READ_CONTACTS, "通讯录", R.drawable.permission_ic_contacts))
-        HiPermission.create(this)
-                .title("亲爱的上帝")
-                .permissions(permissonItems)
-                .filterColor(ResourcesCompat.getColor(resources, R.color.colorPrimary, theme))
-                .msg("为了使用更流畅，请开启这些权限吧！")
-                .style(R.style.PermissionBlueStyle)
-                .checkMutiPermission(object : PermissionCallback {
-                    override fun onFinish() {
-                        if (alphaAnimation != null) {
-                            iv_web_icon.startAnimation(alphaAnimation)
-                        }
-                    }
+        val perms = arrayOf(Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_CONTACTS)
+        EasyPermissions.requestPermissions(this, "钛师傅需要以下权限，请允许", 0, *perms)
 
-                    override fun onDeny(permission: String?, position: Int) {
+    }
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        if (requestCode == 0) {
+            if (perms.isNotEmpty()) {
+                if (perms.contains(Manifest.permission.READ_PHONE_STATE)
+                        && perms.contains(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                &&perms.contains(Manifest.permission.READ_CONTACTS)) {
+                    if (alphaAnimation != null) {
+                        iv_web_icon.startAnimation(alphaAnimation)
                     }
-
-                    override fun onGuarantee(permission: String?, position: Int) {
-                    }
-
-                    override fun onClose() {
-                        showToast("用户关闭权限申请")
-                    }
-                })
+                }
+            }
+        }
     }
 }

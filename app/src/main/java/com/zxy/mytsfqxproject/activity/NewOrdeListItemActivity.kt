@@ -35,7 +35,7 @@ class NewOrdeListItemActivity : BaseActivity(), View.OnClickListener {
     private lateinit var mBespeakServiceListAdapter: BespeakServiceListAdapter
     var pamrms = HashMap<String, Any>()
     var isNewAdd = false
-    var carID = 0
+    var carID = ""
     override fun initView() {
         this.let { StatusBarUtil.darkMode(it) }
         this.let { StatusBarUtil.setPaddingSmart(it, top_view) }
@@ -46,14 +46,14 @@ class NewOrdeListItemActivity : BaseActivity(), View.OnClickListener {
         iv_left.setOnClickListener(this)
         tv_right.setOnClickListener(this)
         if (isNewAdd) {
-            carID = Tools.strByInt(intent.getStringExtra("car_id"))
+            carID = intent.getStringExtra("car_id")
         } else {
             mNewAddOrderBeanitem = intent.getSerializableExtra("item") as NewAddOrderBean.ResultBean.DataBean
             tv_username.text = mNewAddOrderBeanitem!!.username
             tv_car_num.text = mNewAddOrderBeanitem!!.car_number
             Glide.with(this).load(mNewAddOrderBeanitem!!.brand_logo).into(iv_car_icon)
             tv_phone.text = mNewAddOrderBeanitem!!.phone
-            carID = mNewAddOrderBeanitem!!.id
+            carID = mNewAddOrderBeanitem!!.car_number
         }
         tv_yuyue_time.setOnClickListener(this)
         tv_fuwuname.setOnClickListener(this)
@@ -112,17 +112,25 @@ class NewOrdeListItemActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_right -> {
                 pamrms.clear()
                 pamrms["id"] = carID
-                pamrms["bespeak_time"] = tv_yuyue_time.text
                 pamrms["phone"] = tv_phone.text
-
                 if (mBespeakServiceBean.size <= 0) {
                     showToast("请选择服务类别")
                     return
                 }
+                var id = ""
+                for (i in 0 until mBespeakServiceBean.size) {
+                    id = if (i > 0) {
+                        id + "," + mBespeakServiceBean[i].id
+                    } else {
+                        id + "" + mBespeakServiceBean[i].id
+                    }
+                }
+                pamrms["serve_id"] = id
                 if (TextUtils.isEmpty(tv_yuyue_time.text)) {
                     showToast("请选择到店时间")
                     return
                 }
+                pamrms["bespeak_time"] = tv_yuyue_time.text
                 RetrofitManager.service.createBespeak(Tools.getRequestBody(pamrms)).enqueue(object : Callback<JsonObject> {
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 
