@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
-import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
@@ -117,16 +116,14 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        et_car_num.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                if (TextUtils.isEmpty(et_car_num.text)) {
-                    KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showChinese()
-                } else {
-                    KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showNumber()
-                }
-                return false
+        et_car_num.setOnTouchListener { v, event ->
+            if (TextUtils.isEmpty(et_car_num.text)) {
+                KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showChinese()
+            } else {
+                KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showNumber()
             }
-        })
+            false
+        }
     }
 
     override fun onClick(v: View?) {
