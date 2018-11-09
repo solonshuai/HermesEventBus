@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/top_view"
@@ -11,6 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/top_view"
         android:scrollbars="none">
 
         <LinearLayout
@@ -424,8 +424,18 @@
                     android:hint="请选择客户等级"
                     android:maxLength="18"
                     android:textSize="@dimen/album_sp_14" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <android.inputmethodservice.KeyboardView
+        android:id="@+id/keyboard_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@color/c_d8d3cf"
+        android:keyBackground="@drawable/key_abc_bg"
+        android:keyTextColor="@color/c_333333"
+        android:visibility="gone" />
+</RelativeLayout>

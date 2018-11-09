@@ -24,10 +24,6 @@ public class KeyboardUtil {
 
     private EditText ed;
 
-    public KeyboardUtil() {
-
-    }
-
     public KeyboardUtil(Activity act, Context ctx, EditText edit) {
         this.ctx = ctx;
         this.act = act;
@@ -39,6 +35,7 @@ public class KeyboardUtil {
         keyboardView.setEnabled(true);
         keyboardView.setPreviewEnabled(false);
         keyboardView.setOnKeyboardActionListener(listener);
+        keyboardView.setPadding(0, 10, 0, 10);
     }
 
     private KeyboardView.OnKeyboardActionListener listener = new KeyboardView.OnKeyboardActionListener() {

@@ -394,5 +394,4 @@ public class Tools {
         cursor.close();
         return list;
     }
-
 }

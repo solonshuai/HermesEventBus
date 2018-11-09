@@ -5,13 +5,16 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.text.TextUtils
+import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import android.widget.RadioGroup
 import com.etop.PLDemo.EtScanPlateActivity
 import com.etop.utils.*
 import com.etop.vincode.EtVinScanActivity
 import com.google.gson.JsonObject
 import com.zxy.mytsfqxproject.R
+import com.zxy.mytsfqxproject.Utils.KeyboardUtil
 import com.zxy.mytsfqxproject.Utils.StatusBarUtil
 import com.zxy.mytsfqxproject.Utils.Tools
 import com.zxy.mytsfqxproject.View.ShowWheelView
@@ -31,6 +34,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.lang.reflect.Method
 
 /**
  * 日历 订单新添加车辆
@@ -104,6 +108,25 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
         rg_songxiuren.setOnCheckedChangeListener(this)
         rg_songxiuren2.setOnCheckedChangeListener(this)
         iv_phone_scanning.setOnClickListener(this)
+        try {
+            val cls = EditText::class.java
+            val setSoftInputShownOnFocus: Method
+            setSoftInputShownOnFocus = cls.getMethod("setShowSoftInputOnFocus", Boolean::class.javaPrimitiveType)
+            setSoftInputShownOnFocus.isAccessible = true
+            setSoftInputShownOnFocus.invoke(et_car_num, false)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        et_car_num.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                if (TextUtils.isEmpty(et_car_num.text)) {
+                    KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showChinese()
+                } else {
+                    KeyboardUtil(this@NewOrdeAddActivity, this@NewOrdeAddActivity, et_car_num).showNumber()
+                }
+                return false
+            }
+        })
     }
 
     override fun onClick(v: View?) {
@@ -183,7 +206,7 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
                 }
                 pamrms["next_annual_time"] = et_nianshen_num.text
                 pamrms["username"] = et_songxiuren_name.text
-                pamrms["sex"] = sex!!
+                pamrms["sex"] = sex
                 pamrms["client_grade"] = tv_user_level.text
                 pamrms["phone"] = et_phone.text
                 pamrms["client_type"] = type
@@ -200,7 +223,7 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
                             val result = JSONObject(jobj.optString("result"))
                             val car_id = result.optString("car_id")
                             showToast(errmsg)
-                            var intent = Intent(this@NewOrdeAddActivity, NewOrdeListItemActivity::class.java)
+                            val intent = Intent(this@NewOrdeAddActivity, NewOrdeListItemActivity::class.java)
                             intent.putExtra("car_id", car_id)
                             intent.putExtra("newAdd", true)
                             startActivity(intent)
