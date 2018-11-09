@@ -69,11 +69,11 @@ class JDKDActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCheckedC
     private val mHandler = object : Handler() {
         override fun handleMessage(msg: Message) {
             when (msg.what) {
-                0 -> {
+                0 -> {//添加接单开单的服务项目
                     if (mFuwuBean.size > 0) {
-                        var fuwuText = " "
-                        for (i in 0 until mFuwuBean.size) {
-                            fuwuText += mFuwuBean[i].project_title
+                        var fuwuText = " ，"
+                        mFuwuBean.forEach {
+                            fuwuText += it.project_title
                         }
                         tv_fuwu.text = fuwuText
                     } else {
@@ -83,8 +83,8 @@ class JDKDActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCheckedC
                 1 -> {
                     if (mPeiJianBean.size > 0) {
                         var peiText = " "
-                        for (i in 0 until mPeiJianBean.size) {
-                            peiText += mPeiJianBean[i].material_name
+                        mPeiJianBean.forEach {
+                            peiText += it.material_name
                         }
                         tv_peijian.text = peiText
                     } else {
@@ -360,7 +360,6 @@ class JDKDActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCheckedC
         if (requestCode == 400) {
             var plateInfo = ""
             val listResult = data.getStringArrayListExtra("listResult")
-
             for (i in listResult.indices) {
                 plateInfo += listResult[i] + "\r\n"
             }

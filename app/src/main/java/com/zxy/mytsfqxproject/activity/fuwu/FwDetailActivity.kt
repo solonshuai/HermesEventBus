@@ -155,8 +155,10 @@ class FwDetailActivity : BaseActivity(), Callback<FwDetailBean>, View.OnClickLis
             var goods = ""
             try {
                 if (fwDetailBean!!.goods_info.goodsNameList != null && fwDetailBean!!.goods_info.goodsNameList.size > 0) {
-                    for (i in 0 until fwDetailBean!!.goods_info.goodsNameList.size) {
-                        goods += fwDetailBean!!.goods_info.goodsNameList[i]
+                    if (fwDetailBean!!.goods_info.goodsNameList.size > 0) {
+                        fwDetailBean!!.goods_info.goodsNameList.forEach {
+                            goods += it
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -169,8 +171,10 @@ class FwDetailActivity : BaseActivity(), Callback<FwDetailBean>, View.OnClickLis
             tv_shishou.text = "￥" + fwDetailBean!!.total_amount
             var car_verdict = ""
             if (fwDetailBean!!.verify_car.qc_user == null) return
-            for (i in 0 until fwDetailBean!!.verify_car.verify_car_verdict.size) {
-                car_verdict += fwDetailBean!!.verify_car.verify_car_verdict[i] + "; "
+            if (fwDetailBean!!.verify_car.verify_car_verdict.size > 0) {
+                fwDetailBean!!.verify_car.verify_car_verdict.forEach {
+                    car_verdict += it + "; "
+                }
             }
             tv_jian_scr.text = car_verdict
             RetrofitManager.service.yesProjectuUpdate().enqueue(object : Callback<JsonObject> {

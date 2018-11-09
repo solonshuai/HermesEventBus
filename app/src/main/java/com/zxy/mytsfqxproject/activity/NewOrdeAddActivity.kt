@@ -187,9 +187,11 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
                     showToast("请选择保险公司")
                     return
                 }
+
                 for (i in 0 until mInsuranceList.size) {
                     if (tv_baoxian_num.text == mInsuranceBean[i].name) {
                         pamrms["insurance_id"] = mInsuranceBean[i].id
+                        break
                     }
                 }
                 if (TextUtils.isEmpty(tv_daoqi_num.text)) {
@@ -241,8 +243,8 @@ class NewOrdeAddActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCh
                     }
 
                     override fun onResponse(call: Call<InsuranceBean>, response: Response<InsuranceBean>) {
-                        for (i in 0 until response.body()!!.result.size) {
-                            mInsuranceList.add(response.body()!!.result[i].name)
+                        response.body()!!.result.forEach {
+                            mInsuranceList.add(it.name)
                         }
                         mInsuranceBean = response.body()!!.result as ArrayList<InsuranceBean.ResultBean>
                         ShowWheelView.show(this@NewOrdeAddActivity, mInsuranceList) { str ->

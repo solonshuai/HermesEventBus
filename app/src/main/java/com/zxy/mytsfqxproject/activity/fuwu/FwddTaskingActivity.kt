@@ -66,9 +66,9 @@ class FwddTaskingActivity : BaseActivity(), Callback<AddFuwuBean>, OnRecyclerIte
             override fun onResponse(call: Call<ChooseTechBean>, response: Response<ChooseTechBean>) {
                 if (response.body()!!.code == 200) {
                     if (response.body()!!.result.data.size > 0) {
-                        for (i in 0 until response.body()!!.result.data.size) {
-                            mTechList.add(response.body()!!.result.data[i].username)
-                            mapsTech[response.body()!!.result.data[i].username] = response.body()!!.result.data[i].staff_id
+                        response.body()!!.result.data.forEach {
+                            mTechList.add(it.username)
+                            mapsTech[it.username] = it.staff_id
                         }
                     } else {
                         mLayoutStatusView!!.showEmpty()
@@ -112,9 +112,9 @@ class FwddTaskingActivity : BaseActivity(), Callback<AddFuwuBean>, OnRecyclerIte
     private fun gotoNext() {
         ShowWheelView.show(this@FwddTaskingActivity, mTechList) { str ->
             techName = str
-            for (i in 0 until mAddFuwuBean.size) {
-                mAddFuwuBean[i].builder_user = techName
-                mAddFuwuBean[i].builder_uid = mapsTech[techName] as Int
+            mAddFuwuBean.forEach {
+                it.builder_user = techName
+                it.builder_uid = mapsTech[techName] as Int
             }
             mFwTaskAdapter.setDataList(mAddFuwuBean)
         }

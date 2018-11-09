@@ -70,6 +70,7 @@ class OpenCardActivity : BaseActivity(), View.OnClickListener {
                     for (i in 0 until mCarLostBean.size) {
                         if (type == mCarLostBean[i].card_title) {
                             pamrms["card_id"] = mCarLostBean[i].card_id
+                            break
                         }
                     }
                 }
@@ -89,6 +90,7 @@ class OpenCardActivity : BaseActivity(), View.OnClickListener {
                 for (i in 0 until mPayTypeBean.size) {
                     if (payType == mPayTypeBean[i].title) {
                         pamrms["pay_type"] = mPayTypeBean[i].id
+                        break
                     }
                 }
                 RetrofitManager.service.appCreateMember(Tools.getRequestBody(pamrms)).enqueue(object : Callback<JsonObject> {
@@ -114,8 +116,8 @@ class OpenCardActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     override fun onResponse(call: Call<CarLostBean>, response: Response<CarLostBean>) {
-                        for (i in 0 until response.body()!!.result.size) {
-                            mCarList.add(response.body()!!.result[i].card_title)
+                        response.body()!!.result.forEach {
+                            mCarList.add(it.card_title)
                         }
                         mCarLostBean = response.body()!!.result as ArrayList<CarLostBean.ResultBean>
                         ShowWheelView.show(this@OpenCardActivity, mCarList) { str ->
@@ -132,8 +134,8 @@ class OpenCardActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     override fun onResponse(call: Call<CommissionBean>, response: Response<CommissionBean>) {
-                        for (i in 0 until response.body()!!.result.size) {
-                            mCommissionList.add(response.body()!!.result[i].username)
+                        response.body()!!.result.forEach {
+                            mCommissionList.add(it.username)
                         }
                         mCommissionBean = response.body()!!.result as ArrayList<CommissionBean.ResultBean>
                         ShowWheelView.show(this@OpenCardActivity, mCommissionList) { str ->
@@ -153,8 +155,8 @@ class OpenCardActivity : BaseActivity(), View.OnClickListener {
                     }
 
                     override fun onResponse(call: Call<PayTypeBean>, response: Response<PayTypeBean>) {
-                        for (i in 0 until response.body()!!.result.data.size) {
-                            mPayTypeList.add(response.body()!!.result.data[i].title)
+                        response.body()!!.result.data.forEach {
+                            mPayTypeList.add(it.title)
                         }
                         mPayTypeBean = response.body()!!.result.data as ArrayList<PayTypeBean.ResultBean.DataBean>
                         ShowWheelView.show(this@OpenCardActivity, mPayTypeList) { str ->

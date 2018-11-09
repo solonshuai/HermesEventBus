@@ -107,9 +107,9 @@ class SettlementActivity : BaseActivity() {
             }
 
             override fun onResponse(call: Call<PayTypeBean>, response: Response<PayTypeBean>) {
-                for (i in 0 until response.body()!!.result.data.size) {
-                    mPayTypeList.add(response.body()!!.result.data[i].title)
-                    setShowValue[response.body()!!.result.data[i].title] = response.body()!!.result.data[i].id
+                response.body()!!.result.data.forEach {
+                    mPayTypeList.add(it.title)
+                    setShowValue[it.title] = it.id
                 }
                 addPayAdapter.setShowTitle(mPayTypeList)
                 addPayAdapter.setShowValue(setShowValue)
@@ -138,9 +138,9 @@ class SettlementActivity : BaseActivity() {
         addPaylist.add(result)
         pamrms["clear_id"] = clear_id
         if (clientCar.size > 0) {
-            for (i in 0 until clientCar.size) {
-                if (clientCar[i].isCheck) {
-                    pamrms["card_id"] = clientCar[i].mem_id
+            clientCar.forEach {
+                if (it.isCheck) {
+                    pamrms["card_id"] = it.mem_id
                 } else {
                     showToast("请选择一张会员卡哦")
                     return
@@ -151,12 +151,14 @@ class SettlementActivity : BaseActivity() {
         }
         pamrms["comment"] = et_beizhu.text
         val Paylist = ArrayList<AddPaymentView.ResultBean>()
-        for (i in 0 until addPaylist.size) {
-            if (addPaylist[i].pay_title != null && addPaylist[i].amount != null) {
-                Paylist.add(addPaylist[i])
+        if (addPaylist.size > 0) {
+            addPaylist.forEach {
+                if (it.pay_title != null && it.amount != null) {
+                    Paylist.add(it)
+                }
             }
+            pamrms["receipt_data"] = Gson().toJson(Paylist)
         }
-        pamrms["receipt_data"] = Gson().toJson(Paylist)
         RetrofitManager.service.receiptRepair(pamrms).enqueue(object : Callback<JsonObject> {
             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
             }

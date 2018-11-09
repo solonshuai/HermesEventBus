@@ -43,9 +43,9 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
                 0 -> {
                     if (mPeiJianBean.size > 0) {
                         for (i in 0 until mPeiJianBean.size) {
-                            for (j in 0 until mAddFuwuBean.size) {
-                                if (mPeiJianBean[i].stock_id == mAddFuwuBean[j].goods_id && mPeiJianBean[i].material_name == mAddFuwuBean[j].goods_name && mPeiJianBean[i].material_code == mAddFuwuBean[j].goods_code) {
-                                    mAddFuwuBean.removeAt(j)
+                            mAddFuwuBean.forEach {
+                                if (mPeiJianBean[i].stock_id == it.goods_id && mPeiJianBean[i].material_name == it.goods_name && mPeiJianBean[i].material_code == it.goods_code) {
+                                    mAddFuwuBean.remove(it)
                                 }
                             }
                             val addFuwuBean = AddFuwuBean.ResultBean(0, mPeiJianBean[i].stock_id, 20, mPeiJianBean[i].material_name, mPeiJianBean[i].material_code, mPeiJianBean[i].material_num, mPeiJianBean[i].sale_price, Tools.intByStr(mPeiJianBean[i].material_amount), 0)
@@ -53,8 +53,8 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
                         }
                     }
                     if (mFuwuBean.size > 0) {
-                        for (i in 0 until mFuwuBean.size) {
-                            val addFuwuBean = AddFuwuBean.ResultBean(0, mFuwuBean[i].project_id, 10, mFuwuBean[i].project_title, mFuwuBean[i].project_code, 1, mFuwuBean[i].project_price, mFuwuBean[i].project_price, 0)
+                        mFuwuBean.forEach {
+                            val addFuwuBean = AddFuwuBean.ResultBean(0, it.project_id, 10, it.project_title, it.project_code, 1, it.project_price, it.project_price, 0)
                             mAddFuwuBean.add(addFuwuBean)
                         }
                     }
@@ -78,10 +78,10 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
         tv_save.setOnClickListener(this)
         mAddFuwuAdapter.setOnClickLister(object : OnClickLister<AddFuwuBean.ResultBean> {
             override fun onItemAddClick(item: AddFuwuBean.ResultBean?, position: Int) {
-                for (i in 0 until mAddFuwuBean.size) {
-                    if (mAddFuwuBean[i].goods_id == item!!.goods_id && mAddFuwuBean[i].rg_id == item.rg_id) {
-                        mAddFuwuBean[i].goods_amount = item.goods_amount
-                        mAddFuwuBean[i].goods_num = item.goods_num
+                mAddFuwuBean.forEach {
+                    if (it.goods_id == item!!.goods_id && it.rg_id == item.rg_id) {
+                        it.goods_amount = item.goods_amount
+                        it.goods_num = item.goods_num
                         return
                     }
                 }
@@ -127,13 +127,13 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
             R.id.tv_save -> {
                 val goodProjectBean = ArrayList<SaveGoodProjectBean>()
                 val goodMaterialBean = ArrayList<SaveGoodMaterialBean>()
-                for (i in 0 until mAddFuwuBean.size) {
-                    if (mAddFuwuBean[i].goods_type == 10) {
-                        val saveGoodBean = SaveGoodProjectBean(mAddFuwuBean[i].rg_id, mAddFuwuBean[i].goods_id, Tools.strByInt(mAddFuwuBean[i].goods_saleprice), mAddFuwuBean[i].goods_num, Tools.strByInt(mAddFuwuBean[i].goods_amount))
+                mAddFuwuBean.forEach {
+                    if (it.goods_type == 10) {
+                        val saveGoodBean = SaveGoodProjectBean(it.rg_id, it.goods_id, Tools.strByInt(it.goods_saleprice), it.goods_num, Tools.strByInt(it.goods_amount))
                         goodProjectBean.add(saveGoodBean)
                     }
-                    if (mAddFuwuBean[i].goods_type == 20) {
-                        val saveGoodMaterialBean = SaveGoodMaterialBean(mAddFuwuBean[i].rg_id, mAddFuwuBean[i].goods_id, Tools.strByInt(mAddFuwuBean[i].goods_saleprice), mAddFuwuBean[i].goods_num, Tools.strByInt(mAddFuwuBean[i].goods_amount))
+                    if (it.goods_type == 20) {
+                        val saveGoodMaterialBean = SaveGoodMaterialBean(it.rg_id, it.goods_id, Tools.strByInt(it.goods_saleprice), it.goods_num, Tools.strByInt(it.goods_amount))
                         goodMaterialBean.add(saveGoodMaterialBean)
                     }
                 }

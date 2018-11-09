@@ -165,13 +165,15 @@ class MapActivity : BaseActivity(), LocationSource, AMapLocationListener, PoiSea
         if (errcode == 1000) {
             datas.clear()
             val pois = poiResult.pois
-            for (i in 0 until pois.size) {
-                val locationBean = LocationBean()
-                locationBean.add = pois[i].title
-                locationBean.snippet = pois[i].snippet
-                locationBean.latitude = pois[i].latLonPoint.latitude
-                locationBean.longitude = pois[i].latLonPoint.longitude
-                datas.add(locationBean)
+            if(pois.size>0){
+                pois.forEach {
+                    val locationBean = LocationBean()
+                    locationBean.add = it.title
+                    locationBean.snippet = it.snippet
+                    locationBean.latitude = it.latLonPoint.latitude
+                    locationBean.longitude = it.latLonPoint.longitude
+                    datas.add(locationBean)    
+                }
             }
             mMapSearchAdapter.setDataList(datas)
         }

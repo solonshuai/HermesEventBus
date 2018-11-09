@@ -58,11 +58,11 @@ class ProcessFragment : BaseFragment(), Callback<GcglBean>, OnRecyclerItemClickL
         mList1.clear()
         if (response.body()!!.code == 200) {
             if (response.body()!!.result.size > 0) {
-                for (i in 0 until response.body()!!.result.size) {
-                    if (isassgin == "0" && response.body()!!.result[i].assgin == "not") {
-                        mList.add(response.body()!!.result[i])
+                response.body()!!.result.forEach {
+                    if (isassgin == "0" && it.assgin == "not") {
+                        mList.add(it)
                     } else {
-                        mList1.add(response.body()!!.result[i])
+                        mList1.add(it)
                     }
                 }
                 if (isassgin == "0") {

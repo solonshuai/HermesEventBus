@@ -71,10 +71,9 @@ class OrderListActivity : BaseActivity(), View.OnClickListener, Callback<OrdeLis
                     if (response.body()!!.result.size <= 0) {
                         return
                     }
-                    for (i in 0 until response.body()!!.result.size) {
-                        val string = response.body()!!.result[i]
-                        calenderMap.put(getSchemeCalendar(string.days, Tools.intByStr(string.count)).toString(),
-                                getSchemeCalendar(string.days, Tools.intByStr(string.count)))
+                    response.body()!!.result.forEach {
+                        calenderMap.put(getSchemeCalendar(it.days, Tools.intByStr(it.count)).toString(),
+                                getSchemeCalendar(it.days, Tools.intByStr(it.count)))
                     }
                     calendarView.setSchemeDate(calenderMap)
                 }

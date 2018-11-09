@@ -62,22 +62,22 @@ class FwOfferActivity : BaseActivity() {
                     mLayoutStatusView!!.showContent()
                     val project_data = response.body()!!.result.project_data
                     val material_data = response.body()!!.result.material_data
-                    for (i in 0 until project_data.size) {
-                        val addFuwuBean = AddFuwuBean.ResultBean(project_data[i].rg_id, project_data[i].goods_id, project_data[i].goods_type
-                                , project_data[i].goods_name, project_data[i].goods_code, project_data[i].goods_num, project_data[i].goods_saleprice, project_data[i].goods_amount,
-                                project_data[i].builder_user, project_data[i].builder_uid, project_data[i].is_card, project_data[i].goods_oe, project_data[i].goods_unit, project_data[i].goods_price,
-                                project_data[i].goods_discount, project_data[i].total_amount, project_data[i].sale_uid, project_data[i].sale_user, project_data[i].remark)
+                    project_data.forEach {
+                        val addFuwuBean = AddFuwuBean.ResultBean(it.rg_id, it.goods_id,it.goods_type
+                                , it.goods_name, it.goods_code, it.goods_num, it.goods_saleprice, it.goods_amount,
+                                it.builder_user, it.builder_uid, it.is_card, it.goods_oe, it.goods_unit, it.goods_price,
+                                it.goods_discount, it.total_amount, it.sale_uid, it.sale_user, it.remark)
                         mAddFuwuBean.add(addFuwuBean)
-                        val price = project_data[i].goods_num * Tools.strByInt(project_data[i].goods_saleprice)
+                        val price = it.goods_num * Tools.strByInt(it.goods_saleprice)
                         totalMonet += price
                     }
-                    for (i in 0 until material_data.size) {
-                        val addFuwuBean = AddFuwuBean.ResultBean(material_data[i].rg_id, material_data[i].goods_id, material_data[i].goods_type
-                                , material_data[i].goods_name, material_data[i].goods_code, material_data[i].goods_num, material_data[i].goods_saleprice, material_data[i].goods_amount,
-                                material_data[i].builder_user, material_data[i].builder_uid, material_data[i].is_card, material_data[i].goods_oe, material_data[i].goods_unit, material_data[i].goods_price,
-                                material_data[i].goods_discount, material_data[i].total_amount, material_data[i].sale_uid, material_data[i].sale_user, material_data[i].remark, material_data[i].received_num)
+                    material_data.forEach{
+                        val addFuwuBean = AddFuwuBean.ResultBean(it.rg_id, it.goods_id, it.goods_type
+                                , it.goods_name, it.goods_code, it.goods_num, it.goods_saleprice, it.goods_amount,
+                                it.builder_user, it.builder_uid, it.is_card, it.goods_oe, it.goods_unit, it.goods_price,
+                                it.goods_discount, it.total_amount,it.sale_uid, it.sale_user, it.remark, it.received_num)
                         mAddFuwuBean.add(addFuwuBean)
-                        totalMonet += Tools.strByInt(material_data[i].goods_price)
+                        totalMonet += Tools.strByInt(it.goods_price)
                     }
                 }
                 mAddFuwuAdapter.setDataList(mAddFuwuBean)

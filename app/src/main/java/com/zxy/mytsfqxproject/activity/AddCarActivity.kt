@@ -81,9 +81,9 @@ class AddCarActivity : BaseActivity(), View.OnClickListener, OnChooseCameraListe
         et_car_num.setOnTouchListener(object : View.OnTouchListener {
             @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                if(TextUtils.isEmpty(et_car_num.text)){
+                if (TextUtils.isEmpty(et_car_num.text)) {
                     KeyboardUtil(this@AddCarActivity, this@AddCarActivity, et_car_num).showChinese()
-                }else{
+                } else {
                     KeyboardUtil(this@AddCarActivity, this@AddCarActivity, et_car_num).showNumber()
                 }
                 return false
@@ -148,6 +148,7 @@ class AddCarActivity : BaseActivity(), View.OnClickListener, OnChooseCameraListe
                 for (i in 0 until mInsuranceList.size) {
                     if (tv_baoxian_num.text == mInsuranceBean[i].name) {
                         pamrms["insurance_id"] = RequestBody.create(null, "" + mInsuranceBean[i].id)
+                        break
                     }
                 }
                 if (TextUtils.isEmpty(tv_daoqi_num.text)) {
