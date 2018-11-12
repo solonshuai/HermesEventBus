@@ -301,6 +301,9 @@ public class Tools {
      * @return
      */
     public static String getTime(int times, String type) {
+        if (times == 0) {
+            return "";
+        }
         String dateTime;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(type);
         long timeLong = Long.valueOf(times);
@@ -396,6 +399,7 @@ public class Tools {
         cursor.close();
         return list;
     }
+
     /**
      * 获取当前程序的版本号
      *
