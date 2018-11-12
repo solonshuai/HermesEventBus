@@ -75,10 +75,10 @@ public class AddFuwuAdapter extends CommonRecycleAdapter<AddFuwuBean.ResultBean>
         } else {
             holder.setText(R.id.tv_type, "配件");
             holder.setViewVisibility(R.id.iv_edit, View.VISIBLE);
-            if (item.getGoods_price() == null) {
+            if (item.getGoods_saleprice() == null) {
                 holder.setText(R.id.tv_totals, "￥");
             } else {
-                holder.setText(R.id.tv_totals, "￥" + item.getGoods_price());
+                holder.setText(R.id.tv_totals, "￥" + item.getGoods_saleprice());
             }
         }
         if (isOffer) {

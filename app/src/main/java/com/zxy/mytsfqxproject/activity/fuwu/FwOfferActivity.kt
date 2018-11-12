@@ -33,6 +33,7 @@ class FwOfferActivity : BaseActivity() {
     var client_id = 0
     var totalMonet = 0
     var repair_state = 0
+    var issettlement = false
     private var mAddFuwuBean = ArrayList<AddFuwuBean.ResultBean>()
     override fun initView() {
         this.let { StatusBarUtil.darkMode(it) }
@@ -63,7 +64,7 @@ class FwOfferActivity : BaseActivity() {
                     val project_data = response.body()!!.result.project_data
                     val material_data = response.body()!!.result.material_data
                     project_data.forEach {
-                        val addFuwuBean = AddFuwuBean.ResultBean(it.rg_id, it.goods_id,it.goods_type
+                        val addFuwuBean = AddFuwuBean.ResultBean(it.rg_id, it.goods_id, it.goods_type
                                 , it.goods_name, it.goods_code, it.goods_num, it.goods_saleprice, it.goods_amount,
                                 it.builder_user, it.builder_uid, it.is_card, it.goods_oe, it.goods_unit, it.goods_price,
                                 it.goods_discount, it.total_amount, it.sale_uid, it.sale_user, it.remark)
@@ -71,11 +72,11 @@ class FwOfferActivity : BaseActivity() {
                         val price = it.goods_num * Tools.strByInt(it.goods_saleprice)
                         totalMonet += price
                     }
-                    material_data.forEach{
+                    material_data.forEach {
                         val addFuwuBean = AddFuwuBean.ResultBean(it.rg_id, it.goods_id, it.goods_type
                                 , it.goods_name, it.goods_code, it.goods_num, it.goods_saleprice, it.goods_amount,
                                 it.builder_user, it.builder_uid, it.is_card, it.goods_oe, it.goods_unit, it.goods_price,
-                                it.goods_discount, it.total_amount,it.sale_uid, it.sale_user, it.remark, it.received_num)
+                                it.goods_discount, it.total_amount, it.sale_uid, it.sale_user, it.remark, it.received_num)
                         mAddFuwuBean.add(addFuwuBean)
                         totalMonet += Tools.strByInt(it.goods_price)
                     }
@@ -100,13 +101,12 @@ class FwOfferActivity : BaseActivity() {
                 if (code == 200) {
                     val string = jobj.getJSONArray("result")
                     for (i in 0 until string.length()) {
-                        if (repair_state == Tools.strByInt(string[i].toString())) {
-                            tv_offer.text = "结算"
-                            return
-                        } else {
-                            tv_offer.text = "已结账"
-                            return
+                        if (repair_state != Tools.strByInt(string[i].toString())) {
+                            issettlement = true
                         }
+                    }
+                    if (issettlement) {
+                        tv_offer.text = "已结账"
                     }
                 } else {
                     showToast(errmsg)
@@ -116,7 +116,7 @@ class FwOfferActivity : BaseActivity() {
     }
 
     private fun settlement() {
-        if (repair_state != 0) {
+        if (issettlement) {
             return
         }
         pamrms.clear()

@@ -227,8 +227,8 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
             val versionNum = response.body()!!.result.android.versionInfo!!.lastVersion.replace(".", "")
             val currentNum = Tools.getVersionName(this@MainActivity).replace(".", "")
             if (versionNum > currentNum) {
+                showDialog(response.body()!!.result.android.versionInfo!!.isIsForce)
             }
-            showDialog(response.body()!!.result.android.versionInfo!!.isIsForce)
         }
     }
 
