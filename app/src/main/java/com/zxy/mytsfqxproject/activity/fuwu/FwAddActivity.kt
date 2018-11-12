@@ -69,7 +69,7 @@ class FwAddActivity : BaseActivity(), Callback<AddFuwuBean>, View.OnClickListene
         mLayoutStatusView = multipleStatusView
         iv_left.setImageResource(R.mipmap.img_back)
         iv_left.setOnClickListener { finish() }
-        tv_header_title.text = "添加服务"
+        tv_header_title.text = "添加服务/材料"
         mAddFuwuAdapter = AddFuwuAdapter(this)
         recyclerView.layoutManager = LinearLayoutManager(this) as RecyclerView.LayoutManager
         recyclerView.adapter = mAddFuwuAdapter

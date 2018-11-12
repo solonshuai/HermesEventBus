@@ -193,4 +193,7 @@ interface ApiService {
 
     @POST("client/gatherInfo")//电话号码
     fun gatherInfo(@Body route: RequestBody): Call<JsonObject>
+
+    @POST("pub/appset")//app更新
+    fun appset(): Call<AppSetBean>
 }

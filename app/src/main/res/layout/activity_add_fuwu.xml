@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:background="@color/color_orange"
             android:gravity="center"
-            android:text="添加服务"
+            android:text="添加"
             android:textColor="@color/color_white"
             android:textSize="@dimen/album_sp_16" />
 
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="保存商品"
+            android:text="保存"
             android:textColor="@color/color_white"
             android:textSize="@dimen/album_sp_16" />
     </LinearLayout>

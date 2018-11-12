@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.zhjk.admin.mylibrary.MultipleStatusView
 import com.zxy.mytsfqxproject.Utils.ActivityManager
+import com.zxy.mytsfqxproject.View.CustomDialog
 import io.reactivex.annotations.NonNull
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -20,6 +21,7 @@ abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCal
      */
     var mLayoutStatusView: MultipleStatusView? = null
     var mProgressDialog: ProgressDialog? = null
+    lateinit var alert: CustomDialog.Builder
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId())
@@ -28,6 +30,7 @@ abstract class BaseActivity : AppCompatActivity(), EasyPermissions.PermissionCal
         start()
         closeKeyboard()
         ActivityManager.addActivity(this)
+        alert = CustomDialog.Builder(this)
     }
 
     private fun initListener() {
