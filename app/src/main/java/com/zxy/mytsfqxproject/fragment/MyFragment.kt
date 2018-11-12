@@ -86,7 +86,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun showPopupWindow(img: String) {
-        val dialog = CustomPopDialog2.Builder(activity)
+        val dialog = CustomPopDialog2(activity).Builder(activity)
         dialog.imags = img
         dialog.isCanceled = true
         dialog.create().show()

@@ -211,7 +211,7 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
     }
 
     fun showDialog(ismodify: Boolean) {
-        val dialog = CustomPopDialog2.Builder(this)
+        val dialog = CustomPopDialog2(this).Builder(this)
         dialog.imags = null
         dialog.listener = this
         dialog.isCanceled = !ismodify
@@ -227,8 +227,8 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
             val versionNum = response.body()!!.result.android.versionInfo!!.lastVersion.replace(".", "")
             val currentNum = Tools.getVersionName(this@MainActivity).replace(".", "")
             if (versionNum > currentNum) {
-                showDialog(response.body()!!.result.android.versionInfo!!.isIsForce)
             }
+            showDialog(response.body()!!.result.android.versionInfo!!.isIsForce)
         }
     }
 
