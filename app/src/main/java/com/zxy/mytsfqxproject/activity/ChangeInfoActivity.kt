@@ -39,7 +39,7 @@ class ChangeInfoActivity : BaseActivity() {
             override fun onResponse(call: Call<StoreInfoBean>, response: Response<StoreInfoBean>) {
                 if (response.body()!!.code == 200) {
                     val storeInfoBean = response.body()!!.result
-                    et_name.setText(storeInfoBean.bank_name)
+                    et_name.setText(storeInfoBean.store_name)
                     et_phone.setText(storeInfoBean.store_phone)
                     et_address.setText(storeInfoBean.store_address)
                     et_kaihu.setText(storeInfoBean.bank_name)
