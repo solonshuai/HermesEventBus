@@ -20,7 +20,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- android6.0中，获取通讯录的权限是 -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
+    <!-- 安装未知应用 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <!--兼容新式全面屏机型（2:1屏幕）-->
     <meta-data
         android:name="android.max_aspect"
@@ -183,6 +184,9 @@
             android:name=".activity.PhoneAddressBookActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".upload.AndroidOPermissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.yanzhenjie.album.AlbumActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="图库"
@@ -253,6 +257,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="7139673115baf475a08bd7d1dfe3cf55" />
+
         <service android:name="com.amap.api.location.APSService" />
     </application>
 

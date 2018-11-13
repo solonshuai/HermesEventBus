@@ -1,6 +1,7 @@
 package com.zxy.mytsfqxproject
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -24,12 +25,12 @@ import com.zxy.mytsfqxproject.activity.SetActivity
 import com.zxy.mytsfqxproject.base.BaseActivity
 import com.zxy.mytsfqxproject.fragment.HomeFragment
 import com.zxy.mytsfqxproject.fragment.MyFragment
-import com.zxy.mytsfqxproject.http.DownLoadService
 import com.zxy.mytsfqxproject.http.RetrofitManager
 import com.zxy.mytsfqxproject.inter.OnChooseCameraListener
 import com.zxy.mytsfqxproject.mvp.entity.AppSetBean
 import com.zxy.mytsfqxproject.mvp.entity.MessageEvent
 import com.zxy.mytsfqxproject.rongIM.ConversationListAdapterEx
+import com.zxy.mytsfqxproject.upload.AppDownloadManager
 import io.rong.imkit.RongContext
 import io.rong.imkit.fragment.ConversationListFragment
 import io.rong.imlib.model.Conversation
@@ -57,7 +58,7 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
     //默认为0
     private var mIndex = 0
     private var downloadUrl: String? = null
-
+    private var mDownloadManager: AppDownloadManager? = null
     override fun layoutId() = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,8 +69,10 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
         initTab()
         tab_layout.currentTab = mIndex
         switchFragment(mIndex)
+        mProgressDialog = ProgressDialog(this)
         this.let { StatusBarUtil.darkMode(it) }
         this.let { StatusBarUtil.setPaddingSmart(it, top_view) }
+        mDownloadManager = AppDownloadManager(this)
     }
 
     //初始化底部菜单
@@ -258,11 +261,22 @@ class MainActivity : BaseActivity(), OnChooseCameraListener, Callback<AppSetBean
         mProgressDialog!!.setCanceledOnTouchOutside(false)
         mProgressDialog!!.setCancelable(false)
         mProgressDialog!!.show()
-        val updataService = Intent(this@MainActivity, DownLoadService::class.java)
-        updataService.putExtra("downloadurl", downloadUrl)
-        startService(updataService)
+        mDownloadManager!!.downloadApk(downloadUrl, "钛师傅", "")
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (mDownloadManager != null) {
+            mDownloadManager!!.resume()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (mDownloadManager != null) {
+            mDownloadManager!!.onPause()
+        }
+    }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun startInstallPermissionSettingActivity() {
         val packageURI = Uri.parse("package:$packageName")
