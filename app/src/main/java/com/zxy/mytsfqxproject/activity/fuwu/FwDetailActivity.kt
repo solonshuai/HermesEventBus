@@ -1,11 +1,9 @@
 package com.zxy.mytsfqxproject.activity.fuwu
 
-import android.annotation.SuppressLint
+
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import android.os.Handler
-import android.os.Message
 import android.view.View
 import com.google.gson.JsonObject
 import com.zxy.mytsfqxproject.R
@@ -34,17 +32,6 @@ class FwDetailActivity : BaseActivity(), Callback<FwDetailBean>, View.OnClickLis
     var pamrms = HashMap<String, Any>()
     var phone: String = ""
     var fwDetailBean: FwDetailBean.ResultBean? = null
-    @SuppressLint("HandlerLeak")
-    private val mHandler = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            when (msg.what) {
-                0 -> {
-
-                }
-            }
-        }
-    }
-
     override fun initView() {
         this.let { StatusBarUtil.darkMode(it) }
         this.let { StatusBarUtil.setPaddingSmart(it, top_view) }
@@ -173,7 +160,7 @@ class FwDetailActivity : BaseActivity(), Callback<FwDetailBean>, View.OnClickLis
             if (fwDetailBean!!.verify_car.qc_user == null) return
             if (fwDetailBean!!.verify_car.verify_car_verdict.size > 0) {
                 fwDetailBean!!.verify_car.verify_car_verdict.forEach {
-                    car_verdict += it + "; "
+                    car_verdict += "$it; "
                 }
             }
             tv_jian_scr.text = car_verdict
@@ -212,7 +199,7 @@ class FwDetailActivity : BaseActivity(), Callback<FwDetailBean>, View.OnClickLis
         alert.setPositiveButton("确定") { _, _ ->
             //            Intent intent = new Intent(Intent.ACTION_CALL)  需要动态申请权限
             val intent = Intent(Intent.ACTION_DIAL)
-            val data = Uri.parse("tel:" + msg)
+            val data = Uri.parse("tel:$msg")
             intent.data = data
             startActivity(intent)
         }
