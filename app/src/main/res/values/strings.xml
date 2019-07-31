@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">钛师傅助手</string>
-
-    <string name="http_error">请求失败，请重试</string>
-
-</resources>

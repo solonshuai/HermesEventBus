@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="viewfinder_frame">#00cc00</color><!-- 绿色 -->
-    <color name="viewfinder_mask">#60000000</color><!-- 灰度 -->
-</resources>
